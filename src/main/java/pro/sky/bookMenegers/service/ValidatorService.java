@@ -10,10 +10,14 @@ import pro.sky.bookMenegers.exception.IncorrectSurnameException;
 public class ValidatorService {
 
     public String validateName(String name) {
-        if (!StringUtils.isAlpha(name)) {
-            throw new IncorrectNameException();
+        String[] names = name.split("-");
+        for (int i = 0; i < names.length; i++) {
+            if (!StringUtils.isAlpha(names[i])) {
+                throw new IncorrectSurnameException();
+            }
+            names[i] = StringUtils.capitalize(names[i].toLowerCase());
         }
-        return StringUtils.capitalize(name.toLowerCase());
+        return String.join("-", names);
     }
 
     public String validateSurname(String surname) {
